@@ -1,74 +1,39 @@
-The repository contains the PayPal PaymentSDK C#.NET Class Library Application and the PaymentSDKUnitTest C#.NET Visual Studio Test Application.
+# PayPal .NET SDK
+
+![Home Image](https://raw.githubusercontent.com/wiki/paypal/PayPal-NET-SDK/images/homepage.jpg)
+
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/paypal/paypal-net-sdk?svg=true)](https://ci.appveyor.com/project/paypal/paypal-net-sdk) [![NuGet](https://img.shields.io/nuget/v/PayPal.svg)](https://www.nuget.org/packages/PayPal) [![NuGet Downloads](https://img.shields.io/nuget/dt/PayPal.svg)](https://www.nuget.org/packages/PayPal)
+
+The PayPal .NET SDK makes it easy to add PayPal support to your .NET web application and is built on [PayPal's REST APIs](https://developer.paypal.com/docs/api/).
+
+## TLSv1.2 Update
+> **The Payment Card Industry (PCI) Council has [mandated](http://blog.pcisecuritystandards.org/migrating-from-ssl-and-early-tls) that early versions of TLS be retired from service.  All organizations that handle credit card information are required to comply with this standard. As part of this obligation, PayPal is updating its services to require TLS 1.2 for all HTTPS connections. At this time, PayPal will also require HTTP/1.1 for all connections. [Click here](https://github.com/paypal/tls-update) for more information**
+
+> A new `mode` has been created to test if your server/machine handles TLSv1.2 connections. Please use `security-test-sandbox` mode instead of `sandbox` to verify. You can return back to `sandbox` mode once you have verified.
 
 
-Prerequisites
--------------
-   *   Visual Studio 2008 or higher
-   *   log4net 1.2.10
-   *   NuGet 2.2
-   *   Note: NuGet 2.2 requires .NET Framework 4.0
+## Prerequisites
 
-	
-To make an API call
---------------------
-   *  Add references to the following libraries in your project.
-      *   RestApiSDK 
-      *   PayPalCoreSDK.dll 
-      *   Newtonsoft.Json.dll
-      *   log4net.dll 1.2.10.0
-   *   Refer to the App.config file configuration file settings		
-   *   Create 'accesstoken' from 'ClientID' and 'ClientSecret' using `OAuthTokenCredential` and set the same in resource as follows,
+* .NET 4.0 or later
 
-		// Retrieve the access token from
-		// OAuthTokenCredential by passing in
-		// ClientID and ClientSecret
-		// It is not mandatory to generate Access Token on a per call basis.
-		// Typically the access token can be generated once and
-		// reused within the expiry window
-		string accessToken = new OAuthTokenCredential(ConfigManager.Instance.GetProperties()["ClientID"], ConfigManager.Instance.GetProperties()["ClientSecret"]).GetAccessToken();
-		
-   *   Depending on the context of API calls, calling method may be static or non-static (For example, most 'GET' http methods are created as `static` methods within the resource).
-	 
-   If it is static, invoke it as a class method as seen here
+## Documentation
 
-```csharp
-		// Retrieve the payment object by calling the
-		// static `Get` method
-		// on the Payment class by passing a valid
-		// AccessToken and Payment ID
-		Payment pymnt = Payment.Get(accessToken, "PAY-0XL713371A312273YKE2GCNI");
-```
+* [SDK Home Page](http://paypal.github.io/PayPal-NET-SDK/) - A great starting place for using this SDK; includes links to the wiki, sample project source code, releases, and more!
+* [SDK Wiki](https://github.com/paypal/PayPal-NET-SDK/wiki)
+  * [Getting Started](https://github.com/paypal/PayPal-NET-SDK/wiki#getting-started) - Everything you need to begin using this SDK.
+  * [Quick Start](https://github.com/paypal/PayPal-NET-SDK/wiki/Quick-Start) - For those looking to hit the ground running!
+  * [Samples](https://github.com/paypal/PayPal-NET-SDK/wiki/Samples)
+  * [Classic SDK Compatibility](https://github.com/paypal/PayPal-NET-SDK/wiki/Classic-SDK-Compatibility)
+  * [FAQ](https://github.com/paypal/PayPal-NET-SDK/wiki/Frequently-Asked-Questions)
+  * [Contributing to the SDK](https://github.com/paypal/PayPal-NET-SDK/wiki/Contributing-to-the-SDK)
 
+General documentation regarding the PayPal REST API and related payment flows can be found on the [PayPal Developer](https://developer.paypal.com/) site. 
 
-   If it is non-static, invoke it using resource object using the following syntax
-      
-```csharp
-		// A Payment Resource; create one using
-		// the above types and intent as `sale`
-		Payment pymnt = new Payment();
-		pymnt.intent = "sale";
-		...
-		...
-		pymnt.Create(accessToken);
-```
+* [PayPal Developer Documentation](https://developer.paypal.com/docs/)
+* [PayPal REST API Reference](https://developer.paypal.com/webapps/developer/docs/api/)
 
-App.Config Configuration
-------------------------
-   *   endpoint
-   *   ClientID
-   *   ClientSecret
+## License
 
+* PayPal, Inc. SDK License - [LICENSE.txt](https://github.com/paypal/PayPal-NET-SDK/blob/master/LICENSE.txt)
 
-NuGet 
------
-
-NuGet is a Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects that use the .NET Framework. 	If you develop a library or tool that you want to share with other developers, you create a NuGet package and store the package in a NuGet repository. If you want to use a library or tool that someone else has developed, you retrieve the package from the repository and install it in your Visual Studio project or solution. When you install the package, NuGet copies files to your solution and automatically makes whatever changes are needed, such as adding references and changing your app.config or web.config file. If you decide to remove the library, NuGet removes files and reverses whatever changes it made in your project so that no clutter is left.
-
-Here is how you can get NuGet working on your IDE - 
-
-   * [Installing NuGet in Visual Studio 2005 & 2008] (https://github.com/paypal/sdk-core-dotnet/wiki/Using-Nuget-in-Visual-Studio-2005-&-2008)
-   * [Installing NuGet in Visual Studio 2010 & 2012] (https://github.com/paypal/sdk-core-dotnet/wiki/Using-Nuget-in-Visual-Studio-2010-&-2012)
-
-License
--------
-   *   PayPal, Inc. SDK License - LICENSE.txt
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/paypal/PayPal-NET-SDK/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

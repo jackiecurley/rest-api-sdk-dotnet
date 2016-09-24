@@ -3,9 +3,20 @@
 obj
 bin
 
-
 #IDE files
 *.user
 *.suo
 *.pdb
 *.bak
+
+#IDE folders
+.vs
+
+#Unit Test Results
+Source/TestResults
+
+#Log files
+*.log
+
+# Sample project generated files
+sample.png
